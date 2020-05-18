@@ -39,10 +39,11 @@ def create_linked_list(n):
         curr = curr.next
     return head
 
-for n in range(1, 11):
-    head = create_linked_list(n)
-    arr = linked_list_to_array(head)
-    print("original list:", arr)
-    head = reverse_linked_list(head)
-    arr = linked_list_to_array(head)
-    print("reverse list:", arr)
+if __name__ == '__main__':
+    for n in range(1, 11):
+        head = create_linked_list(n)
+        arr = linked_list_to_array(head)
+        print("original list:", arr)
+        head = reverse_linked_list(head)
+        arr = linked_list_to_array(head)
+        print("reverse list:", arr)
