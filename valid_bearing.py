@@ -43,6 +43,24 @@ class Node(object):
     is detected, returns the populated graph otherwise.
 """
 def build_graph(rules):
+    dir2Attr = {
+        "N": {
+            "attr": 'north',
+            "opp_attr": 'south',
+        },
+        "S": {
+            "attr": 'south',
+            "opp_attr": 'north',
+        },
+        "E": {
+            "attr": 'east',
+            "opp_attr": 'west',
+        },
+        "W": {
+            "attr": 'west',
+            "opp_attr": 'east',
+        },
+    }
     graph = {}
     for rule in rules:
         rulTerm = rule.split(' ')
@@ -64,26 +82,10 @@ def build_graph(rules):
             graph[neighId] = neighbor
 
         for direction in rulTerm[1]:
-            if direction == 'N':
-                if neighId in node.north:
-                    return None
-                node.south[neighId] = None
-                neighbor.north[nodeId] = None
-            elif direction == 'S':
-                if neighId in node.south:
-                    return None
-                node.north[neighId] = None
-                neighbor.south[nodeId] = None
-            elif direction == 'E':
-                if neighId in node.east:
-                    return None
-                node.west[neighId] = None
-                neighbor.east[nodeId] = None
-            elif direction == 'W':
-                if neighId in node.west:
-                    return None
-                node.east[neighId] = None
-                neighbor.west[nodeId] = None
+            if neighId in node.__getattribute__(dir2Attr[direction]["attr"]):
+                return None
+            node.__getattribute__(dir2Attr[direction]["opp_attr"])[neighId] = None
+            neighbor.__getattribute__(dir2Attr[direction]["attr"])[nodeId] = None
     return graph
 
 def has_cycle(graph):
