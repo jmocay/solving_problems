@@ -64,8 +64,8 @@ def build_graph(rules):
     graph = {}
     for rule in rules:
         rulTerm = rule.split(' ')
-        if len(rulTerm) != 3: # disregard
-            continue
+        if len(rulTerm) != 3:
+            return None
 
         nodeId = rulTerm[0]
         if nodeId in graph:
@@ -82,6 +82,8 @@ def build_graph(rules):
             graph[neighId] = neighbor
 
         for direction in rulTerm[1]:
+            if direction not in dir2Attr:
+                return None
             if neighId in node.__getattribute__(dir2Attr[direction]["attr"]):
                 return None
             node.__getattribute__(dir2Attr[direction]["opp_attr"])[neighId] = None
@@ -124,6 +126,6 @@ if __name__ == '__main__':
     print(
         'Valid' if is_valid_bearing([
             'A NW B',
-            'A N B'
+            'B S A'
         ]) else 'Invalid'
     )
