@@ -29,28 +29,19 @@ def prime_components(n):
     Sieve of Eratosthenes algorithm
 """
 def generate_primes(n):
-    arr = [k for k in range(2, n+1)]
-
-    i = 0 # prime index
-    p = arr[i]
-    found = True
-    while p <= n and found:
-        k = 1
-        while (i + p*k) < len(arr):
-            arr[i + p*k] = 0
-            k += 1
-        found = False
-        j = i+1
-        while (j < i + p) and j < len(arr):
-            if arr[j] > 0:
-                i = j
-                p = arr[i]
-                found = True
-                break
-            j += 1
-
-    primes = [p for p in arr if p > 0]
-    return primes
+    arr = (n+1)*[True]
+    arr[0] = arr[1] = False
+    p = 2
+    while p <= n:
+        for i in range(2*p, n+1, p):
+            arr[i] = False
+        i = p+1
+        while i <= n and not arr[i]:
+            i += 1
+        if i > n:
+            break
+        p = i
+    return [ el[0] for el in enumerate(arr) if el[1] ]
 
 if __name__ == '__main__':
     for n in range(1, 51):
