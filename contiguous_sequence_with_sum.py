@@ -15,9 +15,9 @@ def contiguous_sequence_with_sum(arr, n):
         while i < len(arr) and total < n:
             total += arr[i]
             i += 1
-        end = i + 1 if i == end else i
+        end = i
         if total == n:
-            return arr[start:end-start]
+            return arr[start:end]
         elif total > n:
             total -= arr[start]
         start += 1
@@ -26,5 +26,6 @@ def contiguous_sequence_with_sum(arr, n):
 if __name__ == '__main__':
     arr = [1, 2, 3, 4, 5]
     n = 12
+    print(arr)
     for k in range(1, n+1):
         print("sum: {0}, sequence: {1}".format(k, contiguous_sequence_with_sum(arr, k)))
