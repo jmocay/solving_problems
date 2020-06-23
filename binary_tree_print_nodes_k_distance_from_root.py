@@ -20,13 +20,11 @@ def print_k_distant_node(root, k, d):
     d += 1
     if k == d:
         print(root.val)
-        d -= 1
         return
     if root.left != None:
         print_k_distant_node(root.left, k, d)
     if root.right != None:
         print_k_distant_node(root.right, k, d)
-    d -= 1
     return
 
 class Node(object):
