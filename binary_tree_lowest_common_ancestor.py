@@ -3,8 +3,8 @@
     of two given nodes in the tree.
     Assume that each node in the tree also has a pointer to its parent.
 """
-
-def find_lowest_common_ancestor_node(node1, node2):
+# First approach using list of ancestor nodes
+def find_lowest_common_ancestor_node0(node1, node2):
     node1_ancestors = get_ancestors(node1)
     node2_ancestors = get_ancestors(node2)
     lca = None
@@ -23,6 +23,22 @@ def get_ancestors(node):
         ancestors.append(node.parent)
         node = node.parent
     return ancestors
+
+# Second approach using dictionary
+def find_lowest_common_ancestor_node(node1, node2):
+    node1_ancestors = {}
+    node = node1
+    while node.parent != None:
+        node1_ancestors[node.parent] = None
+        node = node.parent
+    lca = None
+    node = node2
+    while node.parent != None:
+        if node.parent in node1_ancestors:
+            lca = node.parent
+            break
+        node = node.parent
+    return lca
 
 class Node(object):
     def __init__(self, key):
