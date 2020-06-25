@@ -5,16 +5,8 @@
 """
 
 def find_lowest_common_ancestor_node(node1, node2):
-    node1_ancestors = []
-    node = node1
-    while node.parent != None:
-        node1_ancestors.append(node.parent)
-        node = node.parent
-    node2_ancestors = []
-    node = node2
-    while node.parent != None:
-        node2_ancestors.append(node.parent)
-        node = node.parent
+    node1_ancestors = get_ancestors(node1)
+    node2_ancestors = get_ancestors(node2)
     lca = None
     while len(node1_ancestors) > 0 and len(node2_ancestors) > 0:
         ancestor1 = node1_ancestors.pop()
@@ -24,6 +16,13 @@ def find_lowest_common_ancestor_node(node1, node2):
         else:
             lca = ancestor1
     return lca
+
+def get_ancestors(node):
+    ancestors = []
+    while node.parent != None:
+        ancestors.append(node.parent)
+        node = node.parent
+    return ancestors
 
 class Node(object):
     def __init__(self, key):
