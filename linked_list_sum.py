@@ -18,9 +18,7 @@ For example, given
     4 -> 2 -> 1
 """
 def linked_list_sum(nlist1, nlist2):
-    val1 = nlist1.value()
-    val2 = nlist2.value()
-    return create_linked_list(val1 + val2)
+    return create_linked_list(nlist1.value() + nlist2.value())
 
 class Node(object):
     def __init__(self, val):
