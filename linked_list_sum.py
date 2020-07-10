@@ -18,7 +18,29 @@ For example, given
     4 -> 2 -> 1
 """
 def linked_list_sum(nlist1, nlist2):
-    return create_linked_list(nlist1.value() + nlist2.value())
+    curr1 = nlist1.head
+    curr2 = nlist2.head
+    slist = NumericLinkedList()
+    carry = 0
+    while curr1 != None and curr2 != None:
+        total = curr1.val + curr2.val + carry
+        carry = total // 10
+        slist.add(total % 10)
+        curr1 = curr1.next
+        curr2 = curr2.next
+    while curr1 != None:
+        total = curr1.val + carry
+        carry = total // 10
+        slist.add(total % 10)
+        curr1 = curr1.next
+    while curr2 != None:
+        total = curr2.val + carry
+        carry = total // 10
+        slist.add(total % 10)
+        curr2 = curr2.next
+    if carry > 0:
+        slist.add(carry)
+    return slist
 
 class Node(object):
     def __init__(self, val):
