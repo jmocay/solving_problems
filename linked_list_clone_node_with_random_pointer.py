@@ -16,9 +16,10 @@ def clone_linked_list(src_list):
     dst = dst_list.head
     while src != None and dst != None:
         src_rnd = src.random
-        i = index_from_end(src_rnd)
-        dst_rnd = kth_node(dst_list, n-i+1)
-        dst.random = dst_rnd
+        if src_rnd != None:
+            i = index_from_end(src_rnd)
+            dst_rnd = kth_node(dst_list, n-i+1)
+            dst.random = dst_rnd
         src = src.next
         dst = dst.next
     return dst_list
