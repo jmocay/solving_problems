@@ -15,6 +15,7 @@ def is_isomorphic(str1, str2):
     for i, c in enumerate(str1):
         if not c in cmap:
             cmap[c] = str2[i] # or cmap[str1[i]] = str2[i]
+            continue
         if cmap[c] != str2[i]:
             return False
     return True
